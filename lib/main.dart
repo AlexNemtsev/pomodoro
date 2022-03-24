@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'src/screens/main_screen.dart';
+import 'screens/main_screen.dart';
 
 void main() {
-  runApp(Pomodoro());
+  runApp(const Pomodoro());
 }
 
 class Pomodoro extends StatelessWidget {
+  const Pomodoro({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,12 +16,12 @@ class Pomodoro extends StatelessWidget {
       //   SettingsScreen.id: (context) => SettingsScreen(timers: timers),
       // },
       // initialRoute: MainScreen.id,
-      home: MainScreen(),
+      home: const MainScreen(),
       theme: ThemeData.light().copyWith(
-        appBarTheme: AppBarTheme(backgroundColor: Colors.teal),
+        appBarTheme: const AppBarTheme(backgroundColor: Colors.teal),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            textStyle: TextStyle(color: Color(0xFF388E3C) ),
+            textStyle: const TextStyle(color: Color(0xFF388E3C) ),
           ),
         ),
       ),

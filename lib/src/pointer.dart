@@ -65,13 +65,13 @@ class _PointerState extends State<Pointer> {
                                   width: 150.0,
                                   child: Text(
                                     snapshot.data!['min'].toString(),
-                                    style: kTimerTextStyle,
+                                    style: kDisplayTextStyle,
                                   ),
                                 ),
                                 Container(
                                   child: Text(
                                     ':',
-                                    style: kTimerTextStyle,
+                                    style: kDisplayTextStyle,
                                   ),
                                 ),
                                 Container(
@@ -79,7 +79,7 @@ class _PointerState extends State<Pointer> {
                                   alignment: Alignment.centerLeft,
                                   child: Text(
                                     snapshot.data!['sec'].toString(),
-                                    style: kTimerTextStyle,
+                                    style: kDisplayTextStyle,
                                   ),
                                 )
                               ],

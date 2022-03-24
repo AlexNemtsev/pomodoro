@@ -3,50 +3,44 @@ import 'package:line_icons/line_icons.dart';
 import 'icon_action_button.dart';
 
 class StartButton extends StatelessWidget {
-  final Function onPressed;
+  final onPressed;
 
-  StartButton({required this.onPressed});
+  const StartButton({Key? key, required this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return IconActionButton(
-      onPressed: () {
-        onPressed();
-      },
-      color: Color(0xFF388E3C),
+      onPressed: onPressed,
+      color: const Color(0xFF388E3C),
       icon: LineIcons.play,
     );
   }
 }
 
 class PauseButton extends StatelessWidget {
-  final Function onPressed;
+  final onPressed;
 
-  PauseButton({required this.onPressed});
+  const PauseButton({Key? key, required this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return IconActionButton(
-      onPressed: () {
-        onPressed();
-      },
-      color: Color(0xFF388E3C),
+      onPressed: onPressed,
+      color: const Color(0xFF388E3C),
       icon: LineIcons.pause,
     );
   }
 }
 
 class StopButton extends StatelessWidget {
-  final Function onPressed;
+  final onPressed;
 
-  StopButton({required this.onPressed});
+  const StopButton({Key? key, required this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return IconActionButton(
-      onPressed: () {
-        onPressed();
-      },
+      onPressed: onPressed,
       color: Colors.redAccent,
       icon: LineIcons.stop,
     );
@@ -54,16 +48,14 @@ class StopButton extends StatelessWidget {
 }
 
 class SkipPauseButton extends StatelessWidget {
-  final Function onPressed;
+  final onPressed;
 
-  SkipPauseButton({required this.onPressed});
+  const SkipPauseButton({Key? key, required this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return IconActionButton(
-      onPressed: () {
-        onPressed();
-      },
+      onPressed: onPressed,
       color: Colors.orangeAccent,
       icon: LineIcons.fastForward,
     );
