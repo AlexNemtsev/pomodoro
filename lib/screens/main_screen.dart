@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import '../buttons/buttons.dart';
+import 'package:pomodoro/src/state_provider.dart';
 import '../widgets/display.dart';
+import '../widgets/buttons_widget.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
-
-  // TODO: Добавить блокировку поворота экрана
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Начальное состояние'),
+        title: StateProvider.getTitle(context),
         actions: [
           IconButton(
             onPressed: () {},
@@ -27,19 +26,9 @@ class MainScreen extends StatelessWidget {
               flex: 10,
               child: Display(),
             ),
-            Expanded(
-              // Заглушка для кнопок
+            const Expanded(
               flex: 3,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  StartButton(
-                    onPressed: () {
-                      print('Button checked');
-                    },
-                  ),
-                ],
-              ),
+              child: ButtonsWidget(),
             ),
             Expanded(child: Container()),
           ],
