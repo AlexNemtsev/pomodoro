@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoro/src/states.dart';
-import '../pointer.dart';
+import 'package:pomodoro/src/states_old.dart';
+import '../pointer_old.dart';
 import 'package:flutter/services.dart';
 import 'settings_screen.dart';
-import '../pomodoro_timers.dart';
+import '../pomodoro_timers_old.dart';
 import 'dart:async';
-import '../blocs/controller.dart';
+import '../blocs_old/controller.dart';
 
-class MainScreen extends StatefulWidget {
+class _MainScreen extends StatefulWidget {
   static String id = 'main_screen';
 
   @override
   _MainScreenState createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _MainScreenState extends State<_MainScreen> {
   Timers timers = Timers();
   Future<Timers> future = Timers.restoreData();
   late Controller controller;

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pomodoro/src/blocs/countdown_manager.dart';
+import 'package:provider/provider.dart';
 import '../src/constants.dart';
 
 class Display extends StatelessWidget {
@@ -6,6 +8,7 @@ class Display extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cdm = context.read<CountDownManager>();
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -16,10 +19,21 @@ class Display extends StatelessWidget {
             Container(
               alignment: Alignment.centerRight,
               width: 150,
-              child: const Text(
-                '25',
+              child: StreamBuilder<int>(
+          stream: cdm.stream,
+          initialData: cdm.state,
+          builder: (context, snapshot){
+            final seconds = snapshot.data!;
+            return Text(
+                '$seconds',
                 style: kDisplayTextStyle,
-              ),
+              );
+          },
+        ),
+              // child: const Text(
+              //   '25',
+              //   style: kDisplayTextStyle,
+              // ),
             ),
             const Text(
               ':',

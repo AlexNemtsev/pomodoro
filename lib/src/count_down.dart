@@ -1,32 +1,23 @@
 import 'dart:async';
 
-import 'package:pomodoro/src/blocs/controller.dart';
-
-
-// TODO: Переделать этот класс в InheritedWidget
-// Возможно, т.к. время тут задаётся из другого виджета, возможно, потребуется InheritedModel
 class CountDown {
-  late int _time;
+  int _time;
+  final Duration duration;
   late Timer _timer;
   final _seconds = StreamController<int>.broadcast();
   Stream<int> get seconds => _seconds.stream;
-  late Controller controller;
 
-  CountDown(int minutes, this.controller) {
-    _time = minutes;
-    controller.getTime(_time);
-  }
+  CountDown(this._time, {this.duration = const Duration(seconds: 1)});
 
   void start() {
-    const oneSec = Duration(seconds: 1);
     _timer = Timer.periodic(
-      oneSec,
+      duration,
       (Timer timer) {
         if (_time == 0) {
           stop();
         } else {
           _time--;
-          controller.getTime(_time);
+          _seconds.sink.add(_time);
         }
       },
     );
@@ -34,10 +25,6 @@ class CountDown {
 
   void stop() {
     _timer.cancel();
-  }
-
-  void dispose() {
-    stop();
     _seconds.close();
   }
 }

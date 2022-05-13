@@ -1,7 +1,7 @@
 import 'dart:async';
-import '../count_down.dart';
-import '../pomodoro_timers.dart';
-import '../states.dart';
+import '../count_down_old.dart';
+import '../pomodoro_timers_old.dart';
+import '../states_old.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'blocs/controller.dart';
-import 'pomodoro_timers.dart';
+import 'pomodoro_timers_old.dart';
 import 'constants.dart';
 
 class Pointer extends StatefulWidget {

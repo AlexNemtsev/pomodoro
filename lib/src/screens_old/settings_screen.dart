@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../buttons_old/text_action_button.dart';
-import '../pomodoro_timers.dart';
+import '../pomodoro_timers_old.dart';
 import '../constants.dart';
 
 class SettingsScreen extends StatefulWidget {

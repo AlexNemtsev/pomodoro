@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoro/src/state_provider.dart';
+import 'package:pomodoro/src/blocs/state_manager.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../widgets/display.dart';
 import '../widgets/buttons_widget.dart';
 
@@ -8,32 +9,44 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: StateProvider.getTitle(context),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.settings),
+    final sm = context.read<StateManager>();
+    return Builder(
+      builder: (context) {
+        return Scaffold(
+          appBar: AppBar(
+            title: StreamBuilder<AppState>(
+              stream: sm.stream,
+              initialData: sm.state,
+              builder: (context, snapshot) {
+                final title = snapshot.data!.title;
+                return Text(title);
+              },
+            ),
+            actions: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.settings),
+              ),
+              const SizedBox(width: 10),
+            ],
           ),
-          const SizedBox(width: 10),
-        ],
-      ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            const Expanded(
-              flex: 10,
-              child: Display(),
+          body: SafeArea(
+            child: Column(
+              children: [
+                const Expanded(
+                  flex: 10,
+                  child: Display(),
+                ),
+                const Expanded(
+                  flex: 3,
+                  child: ButtonsWidget(),
+                ),
+                Expanded(child: Container()),
+              ],
             ),
-            const Expanded(
-              flex: 3,
-              child: ButtonsWidget(),
-            ),
-            Expanded(child: Container()),
-          ],
-        ),
-      ),
+          ),
+        );
+      }
     );
   }
 }

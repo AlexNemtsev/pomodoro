@@ -10,18 +10,18 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  syncfusion_flutter_gauges: ^19.2.47
-  syncfusion_flutter_sliders: ^19.2.48
-  path_provider: ^2.0.2
+#  syncfusion_flutter_gauges: ^19.2.47
+#  syncfusion_flutter_sliders: ^19.2.48
+#  path_provider: ^2.0.2
   cupertino_icons: ^1.0.2
   line_icons: ^2.0.1
   audioplayers: ^0.20.1
+  shared_preferences: ^2.0.13
+  provider: ^6.0.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  mockito: ^5.0.14
-  build_runner: ^2.1.1
   flutter_lints: ^1.0.0
 
 flutter:
