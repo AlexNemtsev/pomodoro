@@ -19,6 +19,9 @@ class CountDownManager {
   }
 
   void init(int state) {
+    if(_state == state) return;
+
+    // _state is null
     _state = state;
     _controller.add(_state);
     _countDown = CountDown(_state);
@@ -41,5 +44,8 @@ class CountDownManager {
     init(_state);
   }
 
-  void close() => _controller.close();
+  void close() {
+    _controller.close();
+    _countDown.stop();
+  }
 }

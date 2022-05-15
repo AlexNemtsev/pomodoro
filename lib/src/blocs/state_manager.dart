@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pomodoro/buttons/buttons.dart';
 import 'package:pomodoro/src/blocs/countdown_manager.dart';
-import 'package:provider/provider.dart';
 
 abstract class AppState {
   final StateManager stateManager;
@@ -76,8 +75,10 @@ class StateManager {
     if (event is InitialState) {
       yield InitialState(this);
     } else if (event is WorkingState) {
+      _countDownManager.start();
       yield WorkingState(this);
     } else if (event is WorkingPauseState) {
+      _countDownManager.stop();
       yield WorkingPauseState(this);
     }
   }
