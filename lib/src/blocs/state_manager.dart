@@ -73,6 +73,7 @@ class StateManager {
 
   Stream<AppState> _mapEventToState(AppState event) async* {
     if (event is InitialState) {
+      _countDownManager.reInit();
       yield InitialState(this);
     } else if (event is WorkingState) {
       _countDownManager.start();

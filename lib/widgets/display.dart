@@ -19,11 +19,11 @@ class Display extends StatelessWidget {
             Container(
               alignment: Alignment.centerRight,
               width: 150,
-              child: StreamBuilder<int>(
+              child: StreamBuilder<Time>(
           stream: cdm.stream,
           initialData: cdm.state,
           builder: (context, snapshot){
-            final seconds = snapshot.data!;
+            final seconds = snapshot.data!.seconds;
             return Text(
                 '$seconds',
                 style: kDisplayTextStyle,
