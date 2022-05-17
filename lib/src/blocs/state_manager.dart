@@ -49,7 +49,7 @@ class WorkingPauseState extends AppState {
 
 class StateManager {
   late AppState _state;
-  final CountDownManager _countDownManager;
+  final _countDownManager = CountDownManager();
 
   final _controller = StreamController<AppState>.broadcast();
   late final Stream<AppState> _stateStream;
@@ -57,7 +57,10 @@ class StateManager {
   Stream<AppState> get stream => _stateStream;
   AppState get state => _state;
 
-  StateManager(this._countDownManager) {
+  Stream<Time> get timeStream => _countDownManager.stream;
+  Time get time => _countDownManager.state;
+
+  StateManager() {
     // Возможно, это дело можно преобразовывать через transformer
     _stateStream = _controller.stream
         .asyncExpand<AppState>(_mapEventToState)
@@ -84,5 +87,8 @@ class StateManager {
     }
   }
 
-  void close() => _controller.close();
+  void close() {
+    _controller.close();
+    _countDownManager.close();
+  }
 }
