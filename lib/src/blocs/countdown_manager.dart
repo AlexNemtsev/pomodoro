@@ -60,7 +60,7 @@ class CountDownManager {
   void _init(Time initTime) {
     _state = initTime;
     _controller.add(_state);
-    _countDown = CountDown(initTime.timeInSeconds);
+    _countDown = CountDown(initTime.timeInSeconds, duration: const Duration(milliseconds: 200));
   }
 
   void reInit() {
@@ -70,14 +70,16 @@ class CountDownManager {
   }
 
   void start() {
-    _subscriber = _countDown.seconds;
+    // _subscriber = _countDown.seconds;
     _countDown.start();
 
-    _subscriber.listen((event) {
-      // TODO: Добавить отслеживание окончания работы таймера
-      _state = Time.fromSeconds(event);
-      _controller.add(_state);
-    });
+    _countDown.seconds.listen(
+      (event) {
+        // TODO: Добавить отслеживание окончания работы таймера
+        _state = Time.fromSeconds(event);
+        _controller.add(_state);
+      },
+    );
   }
 
   void stop() {

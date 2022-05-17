@@ -66,6 +66,12 @@ class StateManager {
         .asyncExpand<AppState>(_mapEventToState)
         .asBroadcastStream();
     _stateStream.listen((event) {});
+    // TODO: Сделать перехватчик на основе этого кода
+    timeStream.listen((event) { 
+      if (event == Time.fromSeconds(0)) {
+        add(InitialState(this));
+      }
+    });
     add(InitialState(this));
   }
 
