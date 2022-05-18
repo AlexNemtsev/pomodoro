@@ -8,21 +8,21 @@ class ActionButton extends StatelessWidget {
       required this.child})
       : super(key: key);
 
-  final onPressed;
-  final child;
-  final color;
+  final void Function()? onPressed;
+  final Widget? child;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
     return RawMaterialButton(
       onPressed: onPressed,
-      child: child,
       fillColor: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5),
         side: BorderSide(color: color, width: 1.5),
       ),
       constraints: const BoxConstraints(minWidth: 80, minHeight: 40),
+      child: child,
     );
   }
 }

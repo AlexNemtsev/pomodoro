@@ -3,7 +3,7 @@ import 'package:line_icons/line_icons.dart';
 import 'icon_action_button.dart';
 
 class StartButton extends StatelessWidget {
-  final onPressed;
+  final void Function()? onPressed;
 
   const StartButton({Key? key, required this.onPressed}) : super(key: key);
 
@@ -18,7 +18,7 @@ class StartButton extends StatelessWidget {
 }
 
 class PauseButton extends StatelessWidget {
-  final onPressed;
+  final void Function()? onPressed;
 
   const PauseButton({Key? key, required this.onPressed}) : super(key: key);
 
@@ -33,7 +33,7 @@ class PauseButton extends StatelessWidget {
 }
 
 class StopButton extends StatelessWidget {
-  final onPressed;
+  final void Function()? onPressed;
 
   const StopButton({Key? key, required this.onPressed}) : super(key: key);
 
@@ -48,7 +48,7 @@ class StopButton extends StatelessWidget {
 }
 
 class SkipPauseButton extends StatelessWidget {
-  final onPressed;
+  final void Function()? onPressed;
 
   const SkipPauseButton({Key? key, required this.onPressed}) : super(key: key);
 

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'action_button.dart';
 
 class IconActionButton extends StatelessWidget {
-  late final _icon;
-  final onPressed;
-  final color;
+  late final Icon _icon;
+  final void Function()? onPressed;
+  final Color color;
 
   IconActionButton(
       {Key? key,
@@ -23,8 +23,8 @@ class IconActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ActionButton(
       onPressed: onPressed,
-      child: _icon,
       color: color,
+      child: _icon,
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoro/src/blocs/state_manager.dart';
 import 'package:provider/provider.dart';
-import '../widgets/display.dart';
+import '../widgets/display_widget.dart';
 import '../widgets/buttons_widget.dart';
 
 class MainScreen extends StatelessWidget {
@@ -35,7 +35,7 @@ class MainScreen extends StatelessWidget {
               children: [
                 const Expanded(
                   flex: 10,
-                  child: Display(),
+                  child: DisplayWidget(),
                 ),
                 const Expanded(
                   flex: 3,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-const kGreen = Color(0xFF388E3C);
-const kDisplayTextStyle = TextStyle(
+// const appGreen = Color(0xFF388E3C);
+const displayTextStyle = TextStyle(
   fontSize: 70,
   fontWeight: FontWeight.w400,
   fontFamily: 'Encode Sans SC',

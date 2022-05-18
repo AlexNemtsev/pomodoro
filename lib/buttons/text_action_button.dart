@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'action_button.dart';
 
 class TextActionButton extends StatelessWidget {
-  late final _text;
-  final onPressed;
-  final color;
+  late final Text _text;
+  final void Function()? onPressed;
+  final Color color;
 
   TextActionButton(
       {Key? key,
