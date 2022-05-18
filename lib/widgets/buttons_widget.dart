@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pomodoro/src/blocs/state_manager.dart';
 import 'package:provider/provider.dart';
 
+import '../src/blocs/app_states.dart';
+
 class ButtonsWidget extends StatelessWidget {
   const ButtonsWidget({Key? key}) : super(key: key);
 
