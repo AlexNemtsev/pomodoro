@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoro/src/blocs/state_manager.dart';
-import 'package:provider/provider.dart';
-import '../src/blocs/app_states.dart';
+import 'package:pomodoro/widgets/appbar_title.dart';
 import '../widgets/display_widget.dart';
 import '../widgets/buttons_widget.dart';
 
@@ -10,19 +8,11 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sm = context.read<StateManager>();
     return Builder(
       builder: (context) {
         return Scaffold(
           appBar: AppBar(
-            title: StreamBuilder<AppState>(
-              stream: sm.stream,
-              initialData: sm.state,
-              builder: (context, snapshot) {
-                final title = snapshot.data!.title;
-                return Text(title);
-              },
-            ),
+            title: const AppBarTitle(),
             actions: [
               IconButton(
                 onPressed: () {},
