@@ -28,7 +28,11 @@ class StateManager {
     // TODO: Сделать перехватчик на основе этого кода
     timeStream.listen((event) { 
       if (event == Time.fromSeconds(0)) {
-        add(InitialState(this));
+        // add(BreakingPauseState(this));
+        print('timer is finished');
+        // _countDownManager.start();
+        // _countDownManager.reInit();
+        add(BreakingPauseState(this));
       }
     });
     add(InitialState(this));
@@ -40,6 +44,7 @@ class StateManager {
   }
 
   Stream<AppState> _mapEventToState(AppState event) async* {
+    // TODO: Добавить обработку событий перерыва
     if (event is InitialState) {
       _countDownManager.reInit();
       yield InitialState(this);
@@ -49,6 +54,15 @@ class StateManager {
     } else if (event is WorkingPauseState) {
       _countDownManager.stop();
       yield WorkingPauseState(this);
+    } else if (event is BreakingPauseState) {
+      // Кнопка стоп в паузе перерыва не работает
+      // кнопка пропуска вызывает ошибку: поле в CD не иницализировано
+      // В зависимости от пред события нужно вызывать stop или reInit
+      _countDownManager.reInit();
+      yield BreakingPauseState(this);
+    } else if (event is BreakingState) {
+      _countDownManager.start();
+      yield BreakingState(this);
     }
   }
 
