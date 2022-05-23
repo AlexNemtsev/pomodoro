@@ -48,8 +48,6 @@ class CountDownManager extends Object with AppStateTransformer{
   late Time _state;
   late CountDown _countDown;
 
-  late Stream<int> _subscriber;
-
   final _controller = StreamController<Time>.broadcast();
   final _appStateController = StreamController<AppState>.broadcast();
 
@@ -74,7 +72,6 @@ class CountDownManager extends Object with AppStateTransformer{
   }
 
   void start() {
-    // _subscriber = _countDown.seconds;
     _countDown.start();
 
     _countDown.seconds.listen(

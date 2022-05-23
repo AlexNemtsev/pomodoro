@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:pomodoro/src/blocs/countdown_manager.dart';
-import 'package:pomodoro/src/blocs/mixin_transformer.dart';
 
 import 'app_states.dart';
 
@@ -25,7 +24,6 @@ class StateManager {
     _stateStream = _controller.stream
         .asyncExpand<AppState>(_mapEventToState)
         .asBroadcastStream();
-    // _stateStream = _controller.stream.transform(transformer);
     _stateStream.listen((event) {});
     countDownManager = CountDownManager(_stateStream);
     // TODO: Сделать перехватчик на основе этого кода
@@ -49,13 +47,10 @@ class StateManager {
   Stream<AppState> _mapEventToState(AppState event) async* {
     // TODO: Добавить обработку событий перерыва
     if (event is InitialState) {
-      // countDownManager.reInit();
       yield InitialState(this);
     } else if (event is WorkingState) {
-      // countDownManager.start();
       yield WorkingState(this);
     } else if (event is WorkingPauseState) {
-      // countDownManager.stop();
       yield WorkingPauseState(this);
     } else if (event is BreakingPauseState) {
       // Кнопка стоп в паузе перерыва не работает
