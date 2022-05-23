@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:pomodoro/src/blocs/app_states.dart';
+import 'package:pomodoro/src/blocs/mixin_transformer.dart';
 import 'package:pomodoro/src/count_down.dart';
 
 class Time {
@@ -41,7 +43,7 @@ class Time {
   int get hashCode => minutes.hashCode ^ seconds.hashCode;
 }
 
-class CountDownManager {
+class CountDownManager extends Object with AppStateTransformer{
   final Time initState = Time.fromSeconds(25);
   late Time _state;
   late CountDown _countDown;
@@ -49,12 +51,14 @@ class CountDownManager {
   late Stream<int> _subscriber;
 
   final _controller = StreamController<Time>.broadcast();
+  final _appStateController = StreamController<AppState>.broadcast();
 
   Time get state => _state;
   Stream<Time> get stream => _controller.stream;
 
-  CountDownManager() {
+  CountDownManager(Stream<AppState> appStateStream) {
     _init(initState);
+    _appStateController.addStream(appStateStream.transform(transformer));
   }
 
   void _init(Time initTime) {
