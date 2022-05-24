@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:pomodoro/src/blocs/countdown_manager.dart';
 
+import '../dataclasses/time.dart';
 import 'app_states.dart';
 
 

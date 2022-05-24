@@ -3,45 +3,7 @@ import 'dart:async';
 import 'package:pomodoro/src/blocs/app_states.dart';
 import 'package:pomodoro/src/blocs/state_manager.dart';
 import 'package:pomodoro/src/count_down.dart';
-
-class Time {
-  final int minutes;
-  final int seconds;
-  late int timeInSeconds;
-  Time({
-    required this.minutes,
-    required this.seconds,
-  }) : timeInSeconds = minutes * 60 + seconds;
-
-  factory Time.fromSeconds(int seconds) {
-    return Time(minutes: seconds ~/ 60, seconds: seconds % 60);
-  }
-
-  Time copyWith({
-    int? minutes,
-    int? seconds,
-  }) {
-    return Time(
-      minutes: minutes ?? this.minutes,
-      seconds: seconds ?? this.seconds,
-    );
-  }
-
-  @override
-  String toString() => 'Time(minutes: $minutes, seconds: $seconds)';
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is Time &&
-        other.minutes == minutes &&
-        other.seconds == seconds;
-  }
-
-  @override
-  int get hashCode => minutes.hashCode ^ seconds.hashCode;
-}
+import 'package:pomodoro/src/dataclasses/time.dart';
 
 class CountDownManager {
   final Time initState = Time.fromSeconds(25);
@@ -68,12 +30,13 @@ class CountDownManager {
 
   void _setTransformer(state, sink) {
     if (state is InitialState) {
-      reInit();
+      _reInit();
     } else if (state is WorkingState) {
-      start();
+      _start();
     } else if (state is WorkingPauseState) {
-      stop();
+      _stop();
     }
+    // TODO: Добавить обработку оставшихся событий
   }
 
   void _init(Time initTime) {
@@ -83,13 +46,13 @@ class CountDownManager {
         duration: const Duration(milliseconds: 200));
   }
 
-  void reInit() {
+  void _reInit() {
     if (_state != initState) {
       _init(initState);
     }
   }
 
-  void start() {
+  void _start() {
     _countDown.start();
 
     _countDown.seconds.listen(
@@ -98,16 +61,21 @@ class CountDownManager {
   }
 
   void _finishCheck(int event) {
+    final state = _sm.state;
     if (event == 0) {
       print('timer is finished');
-      _sm.add(InitialState(_sm));
+      if (state is WorkingState) {
+        _sm.add(BreakingPauseState(_sm));
+      } else {
+        _sm.add(InitialState(_sm));
+      }
+      
     }
-    // TODO: Добавить отслеживание окончания работы таймера
     _state = Time.fromSeconds(event);
     _controller.add(_state);
   }
 
-  void stop() {
+  void _stop() {
     _countDown.stop();
     _countDown = CountDown(_state.timeInSeconds);
     _init(_state);

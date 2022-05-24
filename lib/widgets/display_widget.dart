@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoro/src/blocs/countdown_manager.dart';
 import 'package:provider/provider.dart';
 import '../src/blocs/state_manager.dart';
 import '../src/constants.dart';
+import '../src/dataclasses/time.dart';
 
 class DisplayWidget extends StatelessWidget {
   const DisplayWidget({Key? key}) : super(key: key);
