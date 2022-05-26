@@ -6,7 +6,9 @@ import 'package:pomodoro/src/count_down.dart';
 import 'package:pomodoro/src/dataclasses/time.dart';
 
 class CountDownManager {
-  final Time initState = Time.fromSeconds(25);
+  final workingTime = Time.fromSeconds(25);
+  final breakingTime = Time.fromSeconds(25);
+
   late Time _state;
   final StateManager _sm;
   late CountDown _countDown;
@@ -18,7 +20,7 @@ class CountDownManager {
   Stream<Time> get stream => _controller.stream;
 
   CountDownManager(this._sm) {
-    _init(initState);
+    _init(workingTime);
 
     transformer = StreamTransformer<AppState, AppState>.fromHandlers(
       handleData: _setTransformer,
@@ -30,13 +32,18 @@ class CountDownManager {
 
   void _setTransformer(state, sink) {
     if (state is InitialState) {
-      _reInit();
+      _reInit(workingTime);
     } else if (state is WorkingState) {
       _start();
     } else if (state is WorkingPauseState) {
-      _stop();
+      _countDown.stop();
+      _init(_state == Time.fromSeconds(0)? workingTime : _state);
+    } else if (state is BreakingPauseState) {
+      _countDown.stop();
+      _init(_state == Time.fromSeconds(0)? breakingTime : _state);
+    } else if (state is BreakingState) {
+      _start();
     }
-    // TODO: Добавить обработку оставшихся событий
   }
 
   void _init(Time initTime) {
@@ -46,9 +53,9 @@ class CountDownManager {
         duration: const Duration(milliseconds: 200));
   }
 
-  void _reInit() {
-    if (_state != initState) {
-      _init(initState);
+  void _reInit(Time state) {
+    if (_state != state) {
+      _init(state);
     }
   }
 
@@ -63,22 +70,14 @@ class CountDownManager {
   void _finishCheck(int event) {
     final state = _sm.state;
     if (event == 0) {
-      print('timer is finished');
       if (state is WorkingState) {
         _sm.add(BreakingPauseState(_sm));
       } else {
-        _sm.add(InitialState(_sm));
+        _sm.add(WorkingPauseState(_sm));
       }
-      
     }
     _state = Time.fromSeconds(event);
     _controller.add(_state);
-  }
-
-  void _stop() {
-    _countDown.stop();
-    _countDown = CountDown(_state.timeInSeconds);
-    _init(_state);
   }
 
   void close() {
